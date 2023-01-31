@@ -3,17 +3,30 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const bodyParser = require('body-parser')
 
 const app = express()
 
 app.use(express.json())
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}));
+
 const User = require('./models/User')
 const { emit } = require('./models/User')
 
 app.get('/', (req, res) => {
-    res.status(200).json({ msg: "Bem-vindo "} )
+    res.sendFile(__dirname + "/formLogin.html")
+    // res.status(200).json({ msg: "Bem-vindo "} )
 })
+
+app.get('/register', (req, res) => {
+    res.sendFile(__dirname + "/formRegister.html")
+    // res.status(200).json({ msg: "Bem-vindo "} )
+})
+
+
+
 
 app.get('/user/:id', checkToken, async (req, res) => {
 
