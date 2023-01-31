@@ -25,7 +25,9 @@ app.get('/register', (req, res) => {
     // res.status(200).json({ msg: "Bem-vindo "} )
 })
 
-
+app.get('/home', (req, res) => {
+    res.sendFile(__dirname + "/home.html")
+})
 
 
 app.get('/user/:id', checkToken, async (req, res) => {
@@ -131,7 +133,7 @@ app.post('/auth/login', async (req, res) => {
         const token = jwt.sign({
             id: user._id
         }, secret, )
-        res.status(200).json({ msg: "Autenticação realizada com sucesso!", token })
+        res.redirect("/home")
     } catch(error) {
         res.status(500).json({ msg:error })
     }
