@@ -26,7 +26,12 @@ app.get('/register', (req, res) => {
 })
 
 app.get('/home', (req, res) => {
-    res.sendFile(__dirname + "/home.html")
+    // res.sendFile(__dirname + "/home.html")
+    const secret = process.env.SECRET
+    const token = jwt.sign({
+        id: User._id
+    }, secret, )
+    res.status(200).json({ msg: "Autenticação realizada com sucesso!", token })
 })
 
 
