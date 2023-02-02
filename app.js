@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const bodyParser = require('body-parser')
+const sessions = require('express-session')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
@@ -11,6 +13,15 @@ app.use(express.json())
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}));
+
+const oneDay = 1000 * 60 * 60 * 24
+
+app.use(sessions({
+    secret: "secret",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
 
 const User = require('./models/User')
 const { emit } = require('./models/User')
@@ -26,12 +37,12 @@ app.get('/register', (req, res) => {
 })
 
 app.get('/home', (req, res) => {
-    // res.sendFile(__dirname + "/home.html")
-    const secret = process.env.SECRET
-    const token = jwt.sign({
-        id: User._id
-    }, secret, )
-    res.status(200).json({ msg: "Autenticação realizada com sucesso!", token })
+    
+    if(req.session.loggedIn) {
+        res.sendFile(__dirname + "/home.html")
+    } else {
+        res.redirect('/')
+    }
 })
 
 
@@ -138,6 +149,7 @@ app.post('/auth/login', async (req, res) => {
         const token = jwt.sign({
             id: user._id
         }, secret, )
+        req.session.loggedIn = true
         res.redirect("/home")
     } catch(error) {
         res.status(500).json({ msg:error })
