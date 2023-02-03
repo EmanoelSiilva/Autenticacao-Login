@@ -9,23 +9,24 @@
     <script src="https://kit.fontawesome.com/280d7ede1c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h2>Tela Login!</h2>
-
+   
     <div id="form">
+        <h2 id="title">FAÇA SEU LOGIN</h2>
         <form action="/auth/login" method="post">
             <label for="email">E-mail</label>
             <div class="input">
                 <i class="fa-solid fa-envelope"></i>
-                <input type="text" name="email" placeholder="Informe seu e-mail"><br><br>
+                <input type="text" name="email" placeholder="Informe seu e-mail">
             </div>
             <label for="password">Senha</label>
             <div class="input">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" name="password" placeholder="Informe sua senha"><br><br>
+                <input type="password" name="password" placeholder="Informe sua senha">
             </div>
-    
+
             <div id="btn">
                 <button type="submit">Entrar</button>
+                <!-- <input type="submit" value="Enviar"> -->
             </div>
         </form>
     </div>

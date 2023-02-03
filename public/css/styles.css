@@ -11,6 +11,11 @@ body {
     background: linear-gradient(-45deg, #ffce51, #ff7253, #fd5754);
 }
 
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 #form {
     position: relative;
     top: 50%;
@@ -43,6 +48,7 @@ body {
     font-size: 1.2em;
     padding: 5px;
     background: -webkit-linear-gradient(-45deg, #ffce51, #ff7253, #fd5754);
+    
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
