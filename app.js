@@ -159,12 +159,13 @@ app.post('/auth/login', async (req, res) => {
 
 const dbUser = process.env.DB_USER
 const dbPass = process.env.DB_PASS
+const porta = process.env.PORT
+
 
 mongoose
-    .connect(`mongodb+srv://${dbUser}:${dbPass}@cluster0.9pgxywj.mongodb.net/?retryWrites=true&w=majority`,)
+    .connect(`mongodb+srv://${dbUser}:${dbPass}@cluster0.9cs4qwa.mongodb.net/?retryWrites=true&w=majority`,)
     .then(() => {
-        app.listen(3000)
-        console.log("Conectou ao banco!")
+        app.listen(porta)
+        console.log(`Conectou no banco da porta ${porta}`)
 })
     .catch((err) => console.log(err))
-
